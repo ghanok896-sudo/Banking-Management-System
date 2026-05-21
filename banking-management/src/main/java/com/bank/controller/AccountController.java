@@ -2,6 +2,7 @@ package com.bank.controller;
 
 import java.util.List;
 
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -43,6 +44,7 @@ public class AccountController
 	        return accountService.getAllAccounts();
 	    }
 	    
+	    
 	    @GetMapping("/transactions/{accountNumber}")
 	    public List<Transaction> getTransactions(
 	            @PathVariable String accountNumber) {
@@ -71,5 +73,17 @@ public class AccountController
 
 	        return accountService.transferMoney(dto);
 	    }
+	    
+	    @GetMapping("/{id}")
+	    public Account getAccountById(@PathVariable Long id) {
+	        return accountService.getAccountById(id);
+	    }
+	    
+	    @DeleteMapping("/{id}")
+	    public String deleteAccount(@PathVariable Long id) {
 
+	        accountService.deleteAccount(id);
+
+	        return "Account deleted successfully";
+	    }
 }

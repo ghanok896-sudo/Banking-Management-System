@@ -6,6 +6,7 @@ import com.bank.dto.AccountDTO;
 import com.bank.dto.TransactionDTO;
 import com.bank.dto.TransferDTO;
 import com.bank.entity.Account;
+import com.bank.entity.Customer;
 import com.bank.entity.Transaction;
 
 public interface AccountService {
@@ -22,4 +23,10 @@ public interface AccountService {
 	    Account withdraw(TransactionDTO dto);
 
 	    String transferMoney(TransferDTO dto);
+
+		Account getAccountById(Long id);
+		
+		void deleteAccount(Long accountId);
+
+		
 }

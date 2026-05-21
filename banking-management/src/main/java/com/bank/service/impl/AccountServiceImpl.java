@@ -75,6 +75,27 @@ this.transactionRepository = transactionRepository;
 	     return transactionRepository
 	             .findByAccount_AccountNumber(accountNumber);
 	 }
+	 
+	 @Override
+	    public Account getAccountById(Long id) {
+
+	        Account account = accountRepository.findById(id)
+	                .orElseThrow(() ->
+	                        new ResourceNotFoundException("Account not found with id : " + id));
+
+	        return account;
+	    }
+	 
+	 @Override
+	 public void deleteAccount(Long accountId) {
+
+	     Account account = accountRepository
+	             .findById(accountId)
+	             .orElseThrow(() ->
+	                     new ResourceNotFoundException("Account not found"));
+
+	     accountRepository.delete(account);
+	 }
 
 	 @Override
 	    public Account deposit(TransactionDTO dto) {

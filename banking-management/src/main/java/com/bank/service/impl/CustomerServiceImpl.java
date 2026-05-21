@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.bank.dto.CustomerDTO;
 import com.bank.entity.Customer;
+import com.bank.exception.ResourceNotFoundException;
 import com.bank.repository.CustomerRepository;
 import com.bank.service.CustomerService;
 
@@ -41,5 +42,21 @@ public class CustomerServiceImpl implements CustomerService
 
         return customerRepository.findAll();
     }
+    
+    @Override
+    public Customer getCustomerById(Long id) {
 
+        return customerRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Customer not found with id: " + id));
+    }
+    
+    @Override
+    public void deleteCustomer(Long id) {
+
+        Customer customer = customerRepository.findById(id)
+                .orElseThrow(() ->
+                        new ResourceNotFoundException("Customer not found with id : " + id));
+
+        customerRepository.delete(customer);
+    }
 }

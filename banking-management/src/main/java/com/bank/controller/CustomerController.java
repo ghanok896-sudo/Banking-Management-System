@@ -13,7 +13,8 @@ import lombok.RequiredArgsConstructor;
 	@RestController
 	@RequestMapping("/api/customers")
 	@RequiredArgsConstructor
-	public class CustomerController {
+	public class CustomerController 
+	{
 
 	    private final CustomerService customerService;
 	    
@@ -34,6 +35,20 @@ import lombok.RequiredArgsConstructor;
 
 	        return customerService.getAllCustomers();
 	    }
-	}
+	        
+	    @GetMapping("/{id}")
+	    public Customer getCustomerById(@PathVariable Long id) {
+	        return customerService.getCustomerById(id);
+	    }
+	    
+	    @DeleteMapping("/{id}")
+	    public String deleteCustomer(@PathVariable Long id) {
+
+	        customerService.deleteCustomer(id);
+
+	        return "Customer deleted successfully";
+	    }
+	    }
+	
 
 

@@ -34,9 +34,8 @@ public class Transaction
 	private LocalDateTime transactionDate;
 
 	private String remarks;
-
 	@ManyToOne
-	@JoinColumn(name = "account_id")
+    @JoinColumn(name = "account_id")
 	private Account account;
 	
 
